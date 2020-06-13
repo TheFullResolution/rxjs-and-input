@@ -23,6 +23,7 @@ import {
   StartService1Action,
   StartService2Action,
 } from "../types/item.actions";
+import { A } from "@angular/cdk/keycodes";
 
 @Injectable()
 export class ItemService implements OnDestroy {
@@ -37,14 +38,25 @@ export class ItemService implements OnDestroy {
     this.actions$.complete();
   }
 
-  dispatch(action: Action) {
+  private dispatch(action: Action) {
     this.actions$.next(action);
   }
 
-  initialize(item: ItemState) {
+  public initialize(item: ItemState) {
     this.dispatch({
       type: ActionType.initialize,
       payload: item,
+    });
+  }
+
+  public cancel() {
+    this.dispatch({ type: ActionType.cancel });
+  }
+
+  public continue(item: ItemState) {
+    this.dispatch({
+      type: ActionType.startService2,
+      payload: { value: item.value, service1: null },
     });
   }
 
@@ -177,7 +189,11 @@ export class ItemService implements OnDestroy {
             processing: false,
             status: ItemStatus.processed,
           };
-
+        case ActionType.cancel:
+          return {
+            ...state,
+            status: ItemStatus.cancelled,
+          };
         default:
           return state;
       }

@@ -19,7 +19,7 @@ import { takeUntil } from "rxjs/operators";
           <h2>Value: {{ item.value }}</h2>
           <p class="withIcon">Status: {{ itemState?.status }}</p>
         </div>
-        <div class="space">
+        <div class="space service">
           <p>Service1: {{ itemState?.service1 }}</p>
           <p>Service2: {{ itemState?.service2 }}</p>
         </div>
@@ -38,9 +38,16 @@ import { takeUntil } from "rxjs/operators";
           <mat-icon *ngIf="isFailed() && !itemState?.processing" class="error">
             cancel
           </mat-icon>
+          <mat-icon *ngIf="isProcessed() && !itemState?.processing" class="processed">
+            done_outline
+          </mat-icon>
           <div *ngIf="checkIfRetry() && !itemState?.processing" class="buttons">
-            <button mat-raised-button color="warn">Cancel</button>
-            <button mat-raised-button color="accent">Retry</button>
+            <button mat-raised-button color="warn" (click)="cancel()">
+              Cancel
+            </button>
+            <button mat-raised-button color="accent" (click)="continue()">
+              Skip Service1
+            </button>
           </div>
         </div>
       </mat-card-content>
@@ -82,5 +89,17 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   isFailed() {
     return this.itemState?.status === ItemStatus.failedService2;
+  }
+
+  isProcessed() {
+    return this.itemState?.status === ItemStatus.processed;
+  }
+
+  cancel() {
+    this.itemService.cancel();
+  }
+
+  continue() {
+    this.itemService.continue(this.item);
   }
 }

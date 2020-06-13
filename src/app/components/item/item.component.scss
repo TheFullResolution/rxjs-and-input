@@ -29,6 +29,12 @@
   }
 }
 
+.service {
+  p {
+    word-break: break-all;
+  }
+}
+
 .spinner {
   margin: 0 auto;
 }
@@ -44,6 +50,10 @@
   color: red;
 }
 
+.processed {
+  color: forestgreen;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
@@ -53,3 +63,4 @@
     margin: 8px;
   }
 }
+

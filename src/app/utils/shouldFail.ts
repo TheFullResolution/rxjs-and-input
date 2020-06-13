@@ -1,4 +1,4 @@
 export function shouldFail() {
   const random = Math.floor(Math.random() * 10) + 1;
-  return true;
+  return random > 4;
 }

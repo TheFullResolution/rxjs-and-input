@@ -9,6 +9,7 @@ export const ActionType = {
   startService2: "startService2",
   errorService2: "errorService2",
   finishedService2: "finishedService2",
+  cancel: "cancel",
 } as const;
 
 export interface InitializeAction {
@@ -51,7 +52,13 @@ export interface FinishedService2Action {
   payload: { service2: string };
 }
 
+export interface CancelAction {
+  type: typeof ActionType.cancel;
+  payload?: {};
+}
+
 export type Action =
+  | CancelAction
   | SetStateAction
   | InitializeAction
   | StartService1Action
