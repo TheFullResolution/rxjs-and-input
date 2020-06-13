@@ -1,3 +1,5 @@
+@import 'src/variables.scss';
+
 :host {
   width: 100%;
 }
@@ -6,6 +8,48 @@
   width: 100%;
 }
 
-.title {
-  margin-bottom: 24px;
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-flow: dense;
+  grid-gap: 8px;
+}
+
+.space {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p,
+  h2 {
+    margin: 8px 0;
+  }
+}
+
+.spinner {
+  margin: 0 auto;
+}
+
+.visual {
+  mat-icon {
+    @include md-icon-size(50px);
+    margin: 0 auto;
+  }
+}
+
+.error {
+  color: red;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin: -8px;
+
+  > button {
+    margin: 8px;
+  }
 }

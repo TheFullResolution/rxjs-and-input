@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { ItemState } from "../../types/item.state";
+import { ItemState, ItemStatus } from "../../types/item.state";
 import { ItemService } from "../../services/item.service";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -14,20 +14,36 @@ import { takeUntil } from "rxjs/operators";
   selector: "app-item",
   template: `
     <mat-card class="card">
-      <mat-card-content>
-        <div>
+      <mat-card-content class="content">
+        <div class="space">
           <h2>Value: {{ item.value }}</h2>
-          <p>Status: {{ itemState?.status }}</p>
+          <p class="withIcon">Status: {{ itemState?.status }}</p>
         </div>
-        <div>
+        <div class="space">
           <p>Service1: {{ itemState?.service1 }}</p>
           <p>Service2: {{ itemState?.service2 }}</p>
         </div>
+        <div class="space visual">
+          <mat-spinner
+            *ngIf="itemState?.processing"
+            [diameter]="50"
+            class="spinner"
+          ></mat-spinner>
+          <mat-icon
+            *ngIf="isCancelled() && !itemState?.processing"
+            class="error"
+          >
+            cancel_presentation
+          </mat-icon>
+          <mat-icon *ngIf="isFailed() && !itemState?.processing" class="error">
+            cancel
+          </mat-icon>
+          <div *ngIf="checkIfRetry() && !itemState?.processing" class="buttons">
+            <button mat-raised-button color="warn">Cancel</button>
+            <button mat-raised-button color="accent">Retry</button>
+          </div>
+        </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
     </mat-card>
   `,
   styleUrls: ["./item.component.scss"],
@@ -54,5 +70,17 @@ export class ItemComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._ngUnsubscribe$.next();
     this._ngUnsubscribe$.complete();
+  }
+
+  checkIfRetry() {
+    return this.itemState?.status === ItemStatus.failedService1;
+  }
+
+  isCancelled() {
+    return this.itemState?.status === ItemStatus.cancelled;
+  }
+
+  isFailed() {
+    return this.itemState?.status === ItemStatus.failedService2;
   }
 }

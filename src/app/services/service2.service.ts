@@ -4,7 +4,7 @@ import { delay, flatMap, map, reduce } from "rxjs/operators";
 import { shouldFail } from "../utils/shouldFail";
 import randomatic from "randomatic";
 
-const ERROR_MESSAGE = "I really don't know why I am failing";
+const ERROR_MESSAGE = "I am failing";
 
 @Injectable({
   providedIn: "root",
