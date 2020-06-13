@@ -5,7 +5,7 @@ import { ListService } from "../../services/list.service";
   selector: "app-input",
   template: `
     <form (ngSubmit)="onSubmit()" #inputForm="ngForm" class="container">
-      <mat-form-field appearance="outline" class="input">
+      <mat-form-field appearance="outline" class="input" color="accent">
         <mat-label>Input Your Value Here</mat-label>
         <input
           matInput

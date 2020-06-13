@@ -1,8 +1,10 @@
+@import 'src/variables.scss';
+
 .header {
   text-align: center;
 
   h1 {
-    margin-top: 24px;
+    margin-top: $spaceM;
   }
 
   img {

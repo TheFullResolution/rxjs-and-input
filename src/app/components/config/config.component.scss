@@ -1,9 +1,11 @@
+@import 'src/variables.scss';
+
 .container {
-  margin: 36px 0;
+  margin: $spaceL 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-auto-flow: dense;
-  grid-gap: 8px;
+  grid-gap: $spaceXs;
   align-items: center;
   justify-items: center;
 }

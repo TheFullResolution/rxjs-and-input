@@ -1,7 +1,9 @@
+@import 'src/variables.scss';
+
 .container {
   max-width: 650px;
   margin: 0 auto;
-  margin-bottom: 48px;
+  margin-bottom: $spaceL;
 }
 
 .input {
