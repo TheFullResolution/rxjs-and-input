@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <main class="container">
       <app-input></app-input>
+      <app-list></app-list>
     </main>
   `,
   styles: [

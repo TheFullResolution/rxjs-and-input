@@ -6,13 +6,21 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { FormsModule } from "@angular/forms";
-import { HomeComponent } from "./paths/home/home.component";
+import { HomeComponent } from "./home/home.component";
 import { InputComponent } from "./components/input/input.component";
 import { ListComponent } from "./components/list/list.component";
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from "./components/header/header.component";
+import { ItemComponent } from "./components/item/item.component";
 
 @NgModule({
-  declarations: [AppComponent, InputComponent, ListComponent, HomeComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    InputComponent,
+    ListComponent,
+    HomeComponent,
+    HeaderComponent,
+    ItemComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

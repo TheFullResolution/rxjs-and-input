@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ListService } from "../../services/list.service";
 
 @Component({
   selector: "app-input",
@@ -12,8 +13,10 @@ import { Component, OnInit } from "@angular/core";
           type="text"
           [(ngModel)]="input.value"
           name="name"
+          autocomplete="off"
         />
         <button
+          type="button"
           mat-button
           *ngIf="input.value"
           matSuffix
@@ -26,13 +29,13 @@ import { Component, OnInit } from "@angular/core";
         </button>
       </mat-form-field>
       <div class="buttons">
-      <button
-        type="submit"
-        [disabled]="!inputForm.form.valid"
-        mat-raised-button
-      >
-        Submit
-      </button>
+        <button
+          type="submit"
+          [disabled]="!inputForm.form.valid"
+          mat-raised-button
+        >
+          Submit
+        </button>
       </div>
     </form>
   `,
@@ -41,12 +44,13 @@ import { Component, OnInit } from "@angular/core";
 export class InputComponent implements OnInit {
   input = { value: "" };
 
-  constructor() {}
+  constructor(private listService: ListService) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.input);
+    this.listService.processNewInput(this.input.value);
+
     this.input.value = "";
   }
 }
