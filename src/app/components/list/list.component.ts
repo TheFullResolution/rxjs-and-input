@@ -1,26 +1,23 @@
 import { Component, OnInit } from "@angular/core";
 import { ListService } from "../../services/list.service";
-import { Item } from "../../types/item";
+import { ItemState } from "../../types/item.state";
 import { Observable } from "rxjs";
 
 @Component({
   selector: "app-list",
   template: `
-    <mat-list role="list">
+    <ul class="list">
       <ng-container *ngIf="list$ | async as list">
-        <mat-list-item
-          role="listitem"
-          *ngFor="let item of list; trackBy: trackById"
-        >
+        <li *ngFor="let item of list; trackBy: trackById" class="item">
           <app-item [item]="item"></app-item>
-        </mat-list-item>
+        </li>
       </ng-container>
-    </mat-list>
+    </ul>
   `,
-  styles: [],
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  list$: Observable<Item[]>;
+  list$: Observable<ItemState[]>;
 
   constructor(private listService: ListService) {
     this.list$ = this.listService.list$;
@@ -28,5 +25,5 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  trackById = (index: number, item: Item) => item.id;
+  trackById = (index: number, item: ItemState) => item.id;
 }

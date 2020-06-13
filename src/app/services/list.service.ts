@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Item, itemDefault } from "../types/item";
+import { ItemState, itemDefault } from "../types/item.state";
 import * as uniqid from "uniqid";
 import { BehaviorSubject, from, Subject } from "rxjs";
 import { filter, map, scan, shareReplay, tap } from "rxjs/operators";
@@ -8,13 +8,13 @@ import { filter, map, scan, shareReplay, tap } from "rxjs/operators";
   providedIn: "root",
 })
 export class ListService {
-  private list: Subject<Item> = new Subject();
+  private list: Subject<ItemState> = new BehaviorSubject({...itemDefault, value: 'YOLO', id: 'iolo'});
 
   public list$ = this.list.asObservable().pipe(
     scan((array, item) => {
       array.unshift(item);
       return array;
-    }, [] as Item[]),
+    }, [] as ItemState[]),
     shareReplay(1)
   );
 

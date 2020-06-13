@@ -3,7 +3,7 @@ import { from } from "rxjs";
 import { delay, flatMap, map, reduce } from "rxjs/operators";
 import { shouldFail } from "../utils/shouldFail";
 
-const ERROR_MESSAGE = "Service 1 failed";
+const ERROR_MESSAGE = "Numbers are against you";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +13,7 @@ export class Service1Service {
 
   processValue(value: string) {
     return from([value]).pipe(
-      delay(5000),
+      delay(1000),
       flatMap((val) => {
         if (shouldFail()) {
           throw new Error(ERROR_MESSAGE);

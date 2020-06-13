@@ -4,24 +4,22 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatListModule } from "@angular/material/list";
 import { MatCardModule } from "@angular/material/card";
-import { MatGridListModule } from "@angular/material/grid-list";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
   imports: [
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatListModule,
     MatCardModule,
-    MatGridListModule,
+    MatDividerModule,
   ],
   exports: [
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatListModule,
     MatCardModule,
-    MatGridListModule,
+    MatDividerModule,
   ],
 })
 export class MaterialModule {}
