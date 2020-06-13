@@ -11,7 +11,9 @@ import {
   shareReplay,
   startWith,
   tap,
+  withLatestFrom,
 } from "rxjs/operators";
+import { GlobalService, GlobalState } from "./global.service";
 import { Service1Service } from "./service1.service";
 import { checkIfOnlyNumeric } from "../utils/checkIfOnlyNumeric";
 import { Service2Service } from "./service2.service";
@@ -31,7 +33,8 @@ export class ItemService implements OnDestroy {
 
   constructor(
     private service1: Service1Service,
-    private service2: Service2Service
+    private service2: Service2Service,
+    private globalService: GlobalService
   ) {}
 
   ngOnDestroy() {
@@ -91,11 +94,12 @@ export class ItemService implements OnDestroy {
       (action): action is StartService1Action =>
         action.type === ActionType.startService1
     ),
-    flatMap((action) => {
+    withLatestFrom(this.globalService.globalState$),
+    flatMap(([action, globalState]) => {
       return combineLatest(
         this.service1
           .processValue(action.payload.value)
-          .pipe(retryWhen(retryWhenConfig(1, 100))),
+          .pipe(retryWhen(retryWhenConfig(globalState.retries, 100))),
         [action.payload.value]
       );
     }),
@@ -162,6 +166,7 @@ export class ItemService implements OnDestroy {
         case ActionType.startService1:
           return { ...state, processing: true, status: ItemStatus.service1 };
         case ActionType.errorService1:
+          this.globalService.triggerError();
           return {
             ...state,
             processing: false,
@@ -176,6 +181,7 @@ export class ItemService implements OnDestroy {
         case ActionType.startService2:
           return { ...state, processing: true, status: ItemStatus.service2 };
         case ActionType.errorService2:
+          this.globalService.triggerError();
           return {
             ...state,
             processing: false,

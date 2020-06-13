@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
   template: `
     <main class="container">
+      <app-config></app-config>
       <app-input></app-input>
       <app-list></app-list>
     </main>

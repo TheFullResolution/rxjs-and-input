@@ -11,6 +11,7 @@ import { InputComponent } from "./components/input/input.component";
 import { ListComponent } from "./components/list/list.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { ItemComponent } from "./components/item/item.component";
+import { ConfigComponent } from './components/config/config.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ItemComponent } from "./components/item/item.component";
     HomeComponent,
     HeaderComponent,
     ItemComponent,
+    ConfigComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,5 +10,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #fdfdfd;
+  transition: background-color 200ms linear;
 }
 
+.errorBody {
+  background-color: red;
+}

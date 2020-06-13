@@ -1,14 +1,22 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { fadeInOut } from "../../animations/fadeInOut";
 import { ListService } from "../../services/list.service";
 import { ItemState } from "../../types/item.state";
-import { Observable } from "rxjs";
+
+const animations = fadeInOut(0.6);
 
 @Component({
   selector: "app-list",
+  animations: [animations],
   template: `
     <ul class="list">
       <ng-container *ngIf="list$ | async as list">
-        <li *ngFor="let item of list; trackBy: trackById" class="item">
+        <li
+          *ngFor="let item of list; trackBy: trackById"
+          class="item"
+          [@fadeInOut]
+        >
           <app-item [item]="item"></app-item>
         </li>
       </ng-container>
